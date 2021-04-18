@@ -10,7 +10,7 @@ public class Trabajador {
 	private double comision;
 	private List<Trabajo> trabajos;	//Trabajos que el trabajador debe realizar y/o ya realizó
 	
-	// COnstructor
+	// CONSTRUCTOR
 	public Trabajador(String nombre, String email, double costoHora, double comision) {
 		super();
 		this.nombre = nombre;
@@ -18,5 +18,11 @@ public class Trabajador {
 		this.costoHora = costoHora;
 		this.comision = comision;
 		this.trabajos = new ArrayList<>();
+	}
+	
+	
+	//
+	public double comision(){
+		return this.comision;
 	}
 }
