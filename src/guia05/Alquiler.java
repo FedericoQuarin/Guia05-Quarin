@@ -3,7 +3,7 @@ package guia05;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Alquiler {
+public class Alquiler implements Contratable {
 	private LocalDate diaInicio;
 	private LocalDate diaFin;
 	private LocalDate diaDevolucion;
@@ -20,7 +20,7 @@ public class Alquiler {
 	
 	
 	// Se devuelve la herramienta
-	public void devolverHerramienta(LocalDate fechaDevolucion) {
+	public void devolverHerramienta(LocalDate fechaDevolucion){
 		this.diaDevolucion = fechaDevolucion;
 	}
 	
@@ -53,6 +53,17 @@ public class Alquiler {
 		else diasAlquilada = diaInicio.until(diaDevolucion, ChronoUnit.DAYS);
 		
 		return diasAlquilada * herramientaAlquilada.costoPorDia();
+	}
+
+	
+	// Devuelve true si se devolvio la herramienta
+	@Override
+	public boolean finalizado() {
+		boolean devuelta = false;
+		
+		if (diaDevolucion != null) devuelta = true;
+		
+		return devuelta;
 	}
 	
 	

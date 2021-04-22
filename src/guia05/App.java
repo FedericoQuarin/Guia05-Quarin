@@ -55,7 +55,7 @@ public class App {
 		System.out.println("alq2 debe pagar: " + alq2.costo());
 		System.out.println("alq2 en mora? " + alq2.enMora());
 		
-		alq1.devolverHerramienta(fecha3);
+		alq2.devolverHerramienta(fecha3);
 
 		System.out.println("alq2 debe pagar: " + alq2.costo());
 		System.out.println("alq2 en mora? " + alq2.enMora());

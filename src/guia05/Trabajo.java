@@ -2,8 +2,8 @@ package guia05;
 
 import java.time.LocalDate;
 
-public class Trabajo {
-	private LocalDate fechaARealizar;
+public class Trabajo implements Contratable {
+	private LocalDate fechaARealizar, fechaFin;
 	private Boolean urgente;
 	private Trabajador trabajador;	//Trabajador que se encarga de realizar el trabajo
 	private Servicio servicio;	//Servicio que se realizara en el trabajo
@@ -26,15 +26,26 @@ public class Trabajo {
 	// Costo del trabajo a realizar
 	// Si no tiene el trabajo un trabajador asignado y el servicio es estandar, da error de puntero nulo
 	public double costo() {
-		double costo = servicio.costo();
+		double costo = this.servicio.costo();
 		
-		if (servicio instanceof ServicioEstandar) costo += trabajador.comision();
+		if (this.servicio instanceof ServicioEstandar) costo += this.trabajador.comision();
 		
-		if (urgente) costo *= 1.50;
+		if (this.urgente) costo *= 1.50;
 		
 		return costo;
 		
 		
 		
+	}
+	
+	public void finalizar(LocalDate fechaFinalizacion) {
+		this.fechaFin = fechaFinalizacion;
+	}
+
+	
+	// Devuelve true si el trabajo tiene una fecha de fin
+	@Override
+	public boolean finalizado() {
+		return this.fechaFin != null;
 	}
 }
