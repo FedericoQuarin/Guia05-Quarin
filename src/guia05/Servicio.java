@@ -12,4 +12,9 @@ public abstract class Servicio {
 	
 	
 	public abstract double costo();
+
+
+	public Boolean coincideOficio(Oficio oficio) {
+		return this.oficio.equals(oficio);
+	}
 }

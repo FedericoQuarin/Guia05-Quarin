@@ -6,20 +6,24 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
+import guia05.exceptions.AgendaOcupadaException;
+import guia05.exceptions.OficioNoCoincideException;
+
 public class App {
 
 	public static void main(String[] args) {
 		
 		//Pruebas ej 4
 		
-		Oficio plomero = new Oficio();
+		Oficio plomero = new Oficio("Plomero");
+		
 		
 		Servicio s1 = new ServicioEstandar(plomero, 1000);
 		Servicio s2 = new ServicioPersonalizado(plomero, 1000, 100, 500);
 		
 		LocalDate fechaHoy = LocalDate.now();
 		
-		Trabajador trab1 = new Trabajador("Pepe", "pepe@gmail.com", 200, 1000);
+		Trabajador trab1 = new Trabajador("Pepe", "pepe@gmail.com", 1000, plomero);
 		
 		Trabajo t1 = new Trabajo(s1, fechaHoy, true);
 		t1.asignarRealizador(trab1);
@@ -61,6 +65,47 @@ public class App {
 		System.out.println("alq2 en mora? " + alq2.enMora());
 		
 
+		// Pruebas ej 7
+
+		Oficio gasista = new Oficio("Gasista");
+
+		Servicio s3 = new ServicioEstandar(gasista, 1000);
+
+		Trabajo t2 = new Trabajo(s3, LocalDate.now(), true);
+		Trabajo t3 = new Trabajo(s2, LocalDate.now(), false);
+
+		try {
+			trab1.agregarTrabajo(t2);
+			System.out.println("Trabajo agregado con exito");
+		}
+		catch (OficioNoCoincideException exc) {
+			System.out.println("El trabajador no tiene el oficio necesario para realizar este trabajo");
+		}
+		catch (AgendaOcupadaException exc) {
+			System.out.println("El trabajador ya tiene un trabajo asignado el mismo dia");
+		}
+
+		try {
+			trab1.agregarTrabajo(t3);
+			System.out.println("Trabajo agregado con exito");
+		}
+		catch (OficioNoCoincideException exc) {
+			System.out.println("El trabajador no tiene el oficio necesario para realizar este trabajo");
+		}
+		catch (AgendaOcupadaException exc) {
+			System.out.println("El trabajador ya tiene un trabajo asignado el mismo dia");
+		}
+
+		try {
+			trab1.agregarTrabajo(t3);
+			System.out.println("Trabajo agregado con exito");
+		}
+		catch (OficioNoCoincideException exc) {
+			System.out.println("El trabajador no tiene el oficio necesario para realizar este trabajo");
+		}
+		catch (AgendaOcupadaException exc) {
+			System.out.println("El trabajador ya tiene un trabajo asignado el mismo dia");
+		}
 	}
 
 }

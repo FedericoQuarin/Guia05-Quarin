@@ -10,5 +10,4 @@ public class Usuario {
 		super();
 		this.contrataciones = new ArrayList<>();
 	}
-
 }

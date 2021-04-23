@@ -16,6 +16,14 @@ public class Trabajo implements Contratable {
 		this.fechaARealizar = fechaARealizar;
 		this.urgente = urgente;
 	}
+
+
+	// GETTER fechaARealizar
+	public LocalDate getFechaARealizar() {
+		return this.fechaARealizar;
+	}
+
+
 	
 	// Asigna un trabajador que se encargara de realizar el trabajo
 	public void asignarRealizador(Trabajador trabajador) {
@@ -33,9 +41,6 @@ public class Trabajo implements Contratable {
 		if (this.urgente) costo *= 1.50;
 		
 		return costo;
-		
-		
-		
 	}
 	
 	public void finalizar(LocalDate fechaFinalizacion) {
@@ -47,5 +52,11 @@ public class Trabajo implements Contratable {
 	@Override
 	public boolean finalizado() {
 		return this.fechaFin != null;
+	}
+
+
+	// Devuelve true si el oficio pasado por parametro coincide con el oficio correspondiente al servicio a realizar
+	public boolean tieneOficioNecesario(Oficio oficio) {
+		return this.servicio.coincideOficio(oficio);
 	}
 }
