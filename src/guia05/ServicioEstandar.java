@@ -5,8 +5,8 @@ public class ServicioEstandar extends Servicio {
 	
 	
 	// CONSTRUCTOR
-	public ServicioEstandar(Oficio oficio, double montoFijo) {
-		super(oficio);
+	public ServicioEstandar(Oficio oficio, String descripcion, double montoFijo) {
+		super(oficio, descripcion);
 		this.montoFijo = montoFijo;
 	}
 	

@@ -10,12 +10,19 @@ public class Alquiler implements Contratable {
 	private Herramienta herramientaAlquilada;
 	
 	
+	public void estado() {
+		System.out.println(this);
+		System.out.println("DiaInicio: " + diaInicio);
+		System.out.println("DiaFin: " + diaFin);
+		System.out.println("DiaDev: " + diaDevolucion);
+	}
+
 	// CONSTRUCTOR
 	public Alquiler(Herramienta herramienta, LocalDate diaInicio, LocalDate diaFin) {
 		super();
 		this.herramientaAlquilada = herramienta;
 		this.diaInicio = diaInicio;
-		this.diaFin = diaFin;		
+		this.diaFin = diaFin;
 	}
 	
 	
@@ -57,7 +64,6 @@ public class Alquiler implements Contratable {
 
 	
 	// Devuelve true si se devolvio la herramienta
-	@Override
 	public boolean finalizado() {
 		boolean devuelta = false;
 		
@@ -66,7 +72,11 @@ public class Alquiler implements Contratable {
 		return devuelta;
 	}
 	
-	
-	
+
+	@Override
+	public boolean esAlquilerNoDevuelto() {
+		return (!this.finalizado());
+	}
+
 	
 }

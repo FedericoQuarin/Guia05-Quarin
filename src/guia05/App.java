@@ -7,12 +7,123 @@ import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
 import guia05.exceptions.AgendaOcupadaException;
+import guia05.exceptions.AlquilerNoEntregadoException;
 import guia05.exceptions.OficioNoCoincideException;
 
 public class App {
 
 	public static void main(String[] args) {
 		
+		pruebaEj8();
+
+	}
+
+	public static void pruebaEj8() {
+		Oficio plomero = new Oficio("Plomero");
+		Oficio carpintero = new Oficio("Carpintero");
+
+		Servicio serv1 = new ServicioEstandar(plomero, "Arreglo", 1000);
+		Servicio serv2 = new ServicioEstandar(carpintero, "Fabricacion puertas y ventanas", 1000);
+
+		Trabajo trabajo1 = new Trabajo(serv1, LocalDate.of(2021, 4, 28), false);
+		Trabajo trabajo2 = new Trabajo(serv2, LocalDate.of(2021, 4, 30), true);
+		Trabajo trabajo3 = new Trabajo(serv2, LocalDate.of(2021, 4, 27), true);
+
+		Herramienta martillo = new Herramienta("Martillo", 150);
+		Herramienta taladro = new Herramienta("Taladro", 300);
+		Herramienta destornillador = new Herramienta("Destornillador", 200);
+
+		Alquiler alq1 = new Alquiler(martillo, LocalDate.of(2021, 4, 28), LocalDate.of(2021, 5, 10));
+		Alquiler alq2 = new Alquiler(taladro, LocalDate.of(2021, 4, 25), LocalDate.of(2021, 5, 1));
+		Alquiler alq3 = new Alquiler(destornillador, LocalDate.of(2021, 4, 29), LocalDate.of(2021, 5, 15));
+		Alquiler alq4 = new Alquiler(destornillador, LocalDate.of(2021, 5, 17), LocalDate.of(2021, 5, 20));
+		Alquiler alq5 = new Alquiler(martillo, LocalDate.of(2021, 5, 17), LocalDate.of(2021, 5, 20));
+
+		alq1.devolverHerramienta(LocalDate.of(2021, 5, 11));
+
+		Usuario user = new Usuario();
+
+		try {
+			user.contratar(trabajo1);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println("Limite superado");
+		}
+
+		try {
+			user.contratar(alq1);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println("Limite superado");
+		}
+
+		try {
+			user.contratar(alq2);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println("Limite superado");
+		}
+
+		try {
+			user.contratar(alq3);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println("Limite superado");
+		}
+
+		try {
+			user.contratar(trabajo2);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println("Limite superado");
+		}
+
+		try {
+			user.contratar(alq4);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println("Limite superado");
+		}
+		
+		try {
+			user.contratar(alq5);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println("Limite superado");
+		}
+
+		alq4.devolverHerramienta(LocalDate.now());
+
+		try {
+			user.contratar(alq5);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println("Limite superado");
+		}
+
+		try {
+			user.contratar(trabajo3);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println("Limite superado");
+		}
+
+	}
+
+
+
+	
+
+	/*public static void primeraPrueba() {
 		//Pruebas ej 4
 		
 		Oficio plomero = new Oficio("Plomero");
@@ -39,7 +150,6 @@ public class App {
 		LocalDate fecha1 = LocalDate.of(2021, 4, 1);
 		LocalDate fecha2 = LocalDate.of(2021, 4, 20);
 		LocalDate fecha3 = LocalDate.of(2021, 4, 17);
-		
 		
 		
 		Alquiler alq1 = new Alquiler(martillo, fecha1, fecha3);
@@ -106,6 +216,66 @@ public class App {
 		catch (AgendaOcupadaException exc) {
 			System.out.println("El trabajador ya tiene un trabajo asignado el mismo dia");
 		}
-	}
+
+
+		// pruebas 8
+		Trabajo trabajo1 = new Trabajo(s1, LocalDate.now(), false);
+
+		Usuario user = new Usuario();
+
+		try {
+			user.contratar(trabajo1);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println(exc.getMessage());
+		}
+
+		try {
+			user.contratar(alq1);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println(exc.getMessage());
+		}
+
+		try {
+			user.contratar(alq2);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println(exc.getMessage());
+		}
+
+		Alquiler alq3 = new Alquiler(martillo, fecha1, LocalDate.now());
+		Alquiler alq4 = new Alquiler(martillo, fecha1, LocalDate.of(2022, 1, 1));
+		Alquiler alq5 = new Alquiler(new Herramienta("Taladro", 500), fecha1, LocalDate.of(2022, 1, 1));
+
+		try {
+			user.contratar(alq3);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println(exc.getMessage());
+		}
+
+		try {
+			user.contratar(alq4);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println(exc.getMessage());
+		}
+		
+		try {
+			user.contratar(alq5);
+			System.out.println("Contratacion exitosa");
+		}
+		catch (AlquilerNoEntregadoException exc) {
+			System.out.println(exc.getMessage());
+		}
+
+		System.out.println(user.getContrataciones());
+	}*/
 
 }

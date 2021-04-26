@@ -7,8 +7,8 @@ public class ServicioPersonalizado extends Servicio {
 	
 	
 	// CONSTRUCTOR
-	public ServicioPersonalizado(Oficio oficio, double costoPresupuestado, double costoMateriales, double costoTransporte) {
-		super(oficio);
+	public ServicioPersonalizado(Oficio oficio, String descripcion, double costoPresupuestado, double costoMateriales, double costoTransporte) {
+		super(oficio, descripcion);
 		this.costoPresupuestado = costoPresupuestado;
 		this.costoMateriales = costoMateriales;
 		this.costoTransporte = costoTransporte;

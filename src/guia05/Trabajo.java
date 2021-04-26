@@ -47,16 +47,25 @@ public class Trabajo implements Contratable {
 		this.fechaFin = fechaFinalizacion;
 	}
 
-	
 	// Devuelve true si el trabajo tiene una fecha de fin
-	@Override
 	public boolean finalizado() {
 		return this.fechaFin != null;
 	}
-
 
 	// Devuelve true si el oficio pasado por parametro coincide con el oficio correspondiente al servicio a realizar
 	public boolean tieneOficioNecesario(Oficio oficio) {
 		return this.servicio.coincideOficio(oficio);
 	}
+
+
+	@Override
+	public boolean esAlquilerNoDevuelto() {
+		return false;
+	}
+
+
+	public void estado() {
+		System.out.println("trabajo");
+	}
+	
 }
