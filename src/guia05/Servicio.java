@@ -13,7 +13,7 @@ public abstract class Servicio {
 	}
 	
 	
-	public abstract double costo();
+	public abstract double costo(double comisionTrabajador);
 
 
 	public Boolean coincideOficio(Oficio oficio) {

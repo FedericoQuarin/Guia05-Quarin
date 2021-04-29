@@ -10,16 +10,16 @@ import java.util.ArrayList;
 public class Trabajador {
 	private String nombre;
 	private String email;
-	private double comision;
+	private double porcentajeComision;
 	private Oficio oficio;
-	private List<Trabajo> trabajos;	//Trabajos que el trabajador debe realizar y/o ya realiz�
+	private List<Trabajo> trabajos;	//Trabajos que el trabajador debe realizar y/o ya realizo
 	
 	// CONSTRUCTOR
-	public Trabajador(String nombre, String email, double comision, Oficio oficio) {
+	public Trabajador(String nombre, String email, Oficio oficio, double porcentajeComision) {
 		super();
 		this.nombre = nombre;
 		this.email = email;
-		this.comision = comision;
+		this.porcentajeComision = porcentajeComision;
 		this.oficio = oficio;
 		this.trabajos = new ArrayList<>();
 	}
@@ -27,11 +27,11 @@ public class Trabajador {
 	
 	// Devuelve la comision del trabajador
 	public double comision(){
-		return this.comision;
+		return this.porcentajeComision;
 	}
 
 
-	// Permite agregar trabajos a un trabajador
+	// Permite agregar trabajos a un trabajador. Si el trabajador logra agregar el trabajo, se lo asigna como realizador del trabajo.
 	public void agregarTrabajo(Trabajo trabajo) throws OficioNoCoincideException, AgendaOcupadaException{
 		if (!trabajo.tieneOficioNecesario(this.oficio)) throw new OficioNoCoincideException("El trabajador no tiene el oficio requerido para el trabajo");
 		if (this.tieneTrabajoAgendado(trabajo.getFechaARealizar())) throw new AgendaOcupadaException("El trabajador tiene otro trabajo agendado para dicho dia");
@@ -53,6 +53,11 @@ public class Trabajador {
 			}
 		}
 		return retorno;
+	}
+
+
+	public List<Trabajo> lista() {
+		return trabajos;
 	}
 
 }

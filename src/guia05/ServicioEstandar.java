@@ -12,7 +12,7 @@ public class ServicioEstandar extends Servicio {
 	
 	
 	// Funcion que devuelve el costo total del servicio
-	public double costo() {
-		return this.montoFijo;
+	public double costo(double comisionTrabajador) {
+		return this.montoFijo * (1.0 + comisionTrabajador);
 	}
 }

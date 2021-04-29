@@ -6,7 +6,7 @@ public class Herramienta {
 	private boolean alquilada;
 	
 	// CONSTRUCTOR
-	public Herramienta(String nombre, float costoPorDia) {
+	public Herramienta(String nombre, double costoPorDia) {
 		super();
 		this.nombre = nombre;
 		this.costoPorDia = costoPorDia;
@@ -19,4 +19,6 @@ public class Herramienta {
 	public double costoPorDia() {
 		return this.costoPorDia;
 	}
+
+
 }

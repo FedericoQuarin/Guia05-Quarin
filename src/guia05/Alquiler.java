@@ -36,8 +36,8 @@ public class Alquiler implements Contratable {
 	// Devuelve true si la fecha de devolucion es posterior a la fecha de fin del alquiler o 
 	// si la fecha actual es posterior a la fecha de fin del alquiler
 	
-	public Boolean enMora() {
-		Boolean enMora = false;
+	public boolean enMora() {
+		boolean enMora = false;
 		
 		if (diaDevolucion != null) {
 			if (diaDevolucion.isAfter(diaFin)) enMora = true;
